@@ -1,0 +1,228 @@
+// tính tổng khấu trừ  
+DELIMITER $$
+
+CREATE TRIGGER calculate_sum_of_deduction
+BEFORE INSERT ON deduction
+FOR EACH ROW
+BEGIN
+    DECLARE deduction_price INT;
+
+    -- Lấy mức phí phạt từ bảng deduction_cost theo deduction_type
+    SELECT deduction_cost 
+    INTO deduction_price
+    FROM deduction_cost
+    WHERE deduction_type = NEW.deduction_type;
+
+    -- Tính tổng khấu trừ = mức phí phạt * số lần mắc lỗi
+    SET NEW.sum_of_deduction = deduction_price * NEW.amount;
+END $$
+
+DELIMITER ;
+
+//auto tính tiền tăng ca 
+DELIMITER $$
+
+CREATE TRIGGER calculate_sum_of_daily_overtime_pay
+BEFORE INSERT ON attendance
+FOR EACH ROW
+BEGIN
+    DECLARE overtime_pay_per_hour_tg INT;
+
+    -- Get overtime pay per hour from the basic_salary table
+    SELECT overtime_pay_per_hour
+    INTO overtime_pay_per_hour_tg
+    FROM basic_salary bs
+    WHERE bs.teacher_code = NEW.teacher_code;
+
+    -- Calculate the daily overtime pay
+    SET NEW.daily_overtime_pay = NEW.over_time_hours * overtime_pay_per_hour_tg;
+END $$
+
+DELIMITER ;
+
+
+//auto tính bảng lương 
+DELIMITER $$
+
+CREATE TRIGGER calculate_salary_before_insert
+BEFORE INSERT ON salary_report
+FOR EACH ROW
+BEGIN
+    DECLARE current_month INT;
+    DECLARE current_year INT;
+    DECLARE basic_salary INT;
+    DECLARE fixed_allowances INT;
+    DECLARE overtime_pay_per_hour INT;
+    DECLARE work_days INT;
+    DECLARE total_overtime_hours INT;
+    DECLARE total_deductions INT;
+    DECLARE net_salary INT;
+    DECLARE total_overtime_pays INT;
+
+    -- Lấy tháng và năm từ bản ghi mới được chèn vào bảng salary_report
+    SET current_month = NEW.month;
+    SET current_year = NEW.year;
+
+    -- Tính tổng số ngày làm việc của giáo viên trong tháng
+    SELECT COUNT(*) INTO work_days
+    FROM attendance
+    WHERE MONTH(date) = current_month
+      AND YEAR(date) = current_year
+      AND teacher_code = NEW.teacher_code;
+
+    -- Tính tổng giờ tăng ca của giáo viên trong tháng
+    SELECT SUM(over_time_hours) INTO total_overtime_hours
+    FROM attendance
+    WHERE MONTH(date) = current_month
+      AND YEAR(date) = current_year
+      AND teacher_code = NEW.teacher_code;
+    
+     -- tính tổng tiền tăng ca trong tháng 
+    SELECT SUM(daily_overtime_pay) INTO total_overtime_pays
+    FROM attendance
+    WHERE MONTH(date) = current_month
+        AND YEAR(date) = current_year
+        AND teacher_code = NEW.teacher_code;
+
+    -- Tính tổng các khoản khấu trừ của giáo viên trong tháng
+    SELECT SUM(sum_of_deduction) INTO total_deductions
+    FROM deduction
+    WHERE MONTH(date) = current_month
+      AND YEAR(date) = current_year
+      AND teacher_code = NEW.teacher_code;
+     
+        -- Gán các giá trị tính toán vào bản ghi trước khi chèn vào bảng salary_report
+    SET NEW.work_days_in_month = work_days;
+    SET NEW.total_over_time_hours = total_overtime_hours;
+    SET NEW.total_deduction = total_deductions;
+
+    -- Lấy thông tin lương cơ bản, trợ cấp cố định từ bảng basic_salary
+    SELECT basic_salary.basic_salary, basic_salary.fixed_allowances INTO basic_salary, fixed_allowances
+    FROM basic_salary
+    WHERE teacher_code = NEW.teacher_code;
+   
+    SET basic_salary = IFNULL(basic_salary, 0);
+    SET fixed_allowances = IFNULL(fixed_allowances, 0);
+    SET total_overtime_pays = IFNULL(total_overtime_pays, 3);
+    SET total_deductions = IFNULL(total_deductions, 4);
+
+    -- Tính toán lương
+    SET NEW.net_salary = basic_salary + total_overtime_pays + fixed_allowances - total_deductions;
+   
+END $$
+
+DELIMITER ;
+
+
+//
+SET GLOBAL event_scheduler = ON;
+
+//
+SHOW EVENTS;
+
+//DELETE FROM salary_report
+WHERE teacher_code = 'GV367';
+
+
+//
+SELECT TRIGGER_NAME, EVENT_MANIPULATION, EVENT_OBJECT_TABLE, ACTION_STATEMENT, ACTION_TIMING 
+FROM information_schema.TRIGGERS
+WHERE TRIGGER_SCHEMA = 'Test';
+
+//
+DROP TRIGGER IF EXISTS calculate_monthly_salary_report;
+
+//
+INSERT INTO salary_report (
+    month, 
+    year, 
+    work_days_in_month, 
+    total_over_time_hours, 
+    total_salary, 
+    total_deduction, 
+    net_salary, 
+    teacher_code
+) 
+VALUES (
+    10,              -- Tháng 12
+    2023,            -- Năm 2024
+    20,              -- Số ngày làm việc trong tháng
+    10,              -- Tổng giờ tăng ca
+    2000,            -- Lương cơ bản
+    200,             -- Tổng khấu trừ
+    2200,            -- Lương thực nhận (net_salary)
+    'GV367'         -- Mã giáo viên
+);
+
+//
+SELECT * FROM salary_report WHERE teacher_code = 'GV367' AND month = 10 AND year = 2023;
+
+//
+SHOW TRIGGERS;
+
+//DELIMITER $$
+
+CREATE TRIGGER calculate_monthly_salary_report
+AFTER INSERT ON salary_report
+FOR EACH ROW
+BEGIN
+    DECLARE current_month INT;
+    DECLARE current_year INT;
+    DECLARE basic_salary INT;
+    DECLARE overtime_rate INT;
+    DECLARE fixed_allowances INT;
+    DECLARE overtime_pay_per_hour INT;
+    DECLARE work_days INT;
+    DECLARE total_overtime INT;
+    DECLARE total_deductions INT;
+    DECLARE net_salary INT;
+
+    -- Lấy tháng và năm từ bản ghi mới được chèn vào bảng salary_report
+    SET current_month = NEW.month;
+    SET current_year = NEW.year;
+
+    -- Tính tổng số ngày làm việc của giáo viên trong tháng
+    SELECT COUNT(*) INTO work_days
+    FROM attendance
+    WHERE MONTH(date) = current_month
+      AND YEAR(date) = current_year
+      AND teacher_code = NEW.teacher_code;
+
+    -- Tính tổng giờ tăng ca của giáo viên trong tháng
+    SELECT SUM(over_time_hours) INTO total_overtime
+    FROM attendance
+    WHERE MONTH(date) = current_month
+      AND YEAR(date) = current_year
+      AND teacher_code = NEW.teacher_code;
+
+    -- Tính tổng các khoản khấu trừ của giáo viên trong tháng
+    SELECT SUM(sum_of_deduction) INTO total_deductions
+    FROM deduction
+    WHERE MONTH(date) = current_month
+      AND YEAR(date) = current_year
+      AND teacher_code = NEW.teacher_code;
+
+    -- Lấy thông tin lương cơ bản, trợ cấp cố định và mức tăng ca từ bảng basic_salary
+    SELECT basic_salary, fixed_allowances, overtime_rate INTO basic_salary, fixed_allowances, overtime_pay_per_hour
+    FROM basic_salary
+    WHERE teacher_code = NEW.teacher_code;
+
+    -- Tính toán lương thực nhận
+    SET net_salary = basic_salary 
+                     - total_deductions 
+                     + (total_overtime * overtime_pay_per_hour) 
+                     + fixed_allowances;
+
+    -- Cập nhật bảng salary_report với các giá trị đã tính toán
+    UPDATE salary_report
+    SET work_days_in_month = work_days,
+        total_over_time_hours = total_overtime,
+        total_salary = basic_salary + (total_overtime * overtime_pay_per_hour) + fixed_allowances,
+        total_deduction = total_deductions,
+        net_salary = net_salary
+    WHERE salary_report_id = NEW.salary_report_id;
+END $$
+
+DELIMITER ;
+
+

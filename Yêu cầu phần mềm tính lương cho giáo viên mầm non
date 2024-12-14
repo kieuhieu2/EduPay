@@ -1,0 +1,28 @@
+Phần mềm tính lương cho giáo viên mầm non tư thục  cần quản lý:
+1. Thông tin cá nhân của giáo viên
+  - Họ tên, ngày sinh, địa chỉ, số điện thoại.
+  - Chức vụ (giáo viên chính, trợ giảng, quản lý, v.v.).
+  - Trình độ chuyên môn, bằng cấp, kinh nghiệm làm việc.
+2. Chấm công và thời gian làm việc
+  - Ngày làm việc, thời gian làm việc (giờ vào, giờ ra).
+  - Số ngày làm việc trong tháng, số ngày nghỉ.
+  - Làm thêm giờ (nếu có).
+  - Thông tin về các ngày nghỉ phép, nghỉ ốm, nghỉ không lương.
+3. Bảng lương cơ bản
+  - Lương cơ bản của giáo viên theo hợp đồng.
+  - Phụ cấp (ăn trưa, đi lại, nhà ở, chuyên môn, v.v.).
+  - Tính lương theo giờ hoặc ngày làm việc.
+4. Khấu trừ và trừ lương
+  - Các khoản bảo hiểm xã hội, bảo hiểm y tế (nếu có).
+  - Các khoản trừ do nghỉ không lương, đi muộn hoặc vi phạm quy định.
+5. Báo cáo và thống kê
+  - Báo cáo lương hàng tháng cho từng giáo viên.
+  - Thống kê về số ngày làm việc, giờ làm việc thêm.
+  - Lịch sử trả lương, các khoản thưởng và khấu trừ theo thời gian.
+7. Quản lý hợp đồng lao động (mở rộng)
+  - Thông tin về loại hợp đồng (thử việc, chính thức, ngắn hạn, dài hạn).
+  - Thời gian ký hợp đồng và thời gian kết thúc hợp đồng.
+  - Điều chỉnh mức lương theo thỏa thuận hoặc kỳ hạn.
+  - Tính toán lương theo hình thức tăng ca hoặc làm việc vào các ngày lễ, Tết.
+  - Quản lý nghỉ phép hàng năm, tính lương cho giáo viên khi nghỉ phép.
+  - Hỗ trợ giáo viên tự tra cứu bảng lương, báo cáo công làm việc.
