@@ -1,6 +1,6 @@
 Phần mềm tính lương cho giáo viên mầm non tư thục  cần quản lý:
-Đây là 7 yêu cầu.
-
+ - Đây là 7 yêu cầu của trang web 
+ - Web được tạo ra với Backend Java Spring boot 3 và front end react v18 
 1. Thông tin cá nhân của giáo viên
   - Họ tên, ngày sinh, địa chỉ, số điện thoại.
   - Chức vụ (giáo viên chính, trợ giảng, quản lý, v.v.).
