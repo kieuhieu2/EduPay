@@ -1,7 +1,9 @@
 package com.edu.kindergarten.controller;
 
 import com.edu.kindergarten.dto.request.ApiResponse;
+import com.edu.kindergarten.dto.request.salaryReportRequest.CustomerFeedbackRequest;
 import com.edu.kindergarten.dto.request.salaryReportRequest.SalaryReportCreateRequestDTO;
+import com.edu.kindergarten.dto.response.salaryReportCreateResponse.CustomerFeedbackResponse;
 import com.edu.kindergarten.dto.response.salaryReportCreateResponse.GetMySalaryReportResponse;
 import com.edu.kindergarten.dto.response.salaryReportCreateResponse.SalaryReportCreateResponse;
 import com.edu.kindergarten.service.SalaryReportService;
@@ -10,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/salaryReport")
@@ -57,6 +61,27 @@ public class SalaryReportController {
                                                               @PathVariable Integer year) {
         return ApiResponse.<GetMySalaryReportResponse>builder()
                 .result(salaryReportService.getMySalaryReport(teacherCode, month, year))
+                .build();
+    }
+
+    @PostMapping(path = "/customerFeedback/{salaryReportId}", headers = "apiVersion=v1.0")
+    public ApiResponse<CustomerFeedbackResponse> createCustomerFeedback(@PathVariable Integer salaryReportId, @RequestBody CustomerFeedbackRequest request) {
+        return ApiResponse.<CustomerFeedbackResponse>builder()
+                .result(salaryReportService.createCustomerFeedback(salaryReportId, request))
+                .build();
+    }
+
+    @GetMapping(path = "/customerFeedback/{salaryReportId}", headers = "apiVersion=v1.0")
+    public ApiResponse<CustomerFeedbackResponse> getCustomerFeedback(@PathVariable Integer salaryReportId) {
+        return ApiResponse.<CustomerFeedbackResponse>builder()
+                .result(salaryReportService.getCustomerFeedback(salaryReportId))
+                .build();
+    }
+
+    @GetMapping(path = "/customerFeedback/", headers = "apiVersion=v1.0")
+    public ApiResponse<List<CustomerFeedbackResponse>> getCustomerFeedbacks() {
+        return ApiResponse.<List<CustomerFeedbackResponse>>builder()
+                .result(salaryReportService.getCustomerFeedbacks())
                 .build();
     }
 }

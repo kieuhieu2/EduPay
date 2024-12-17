@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,6 +27,9 @@ public class SalaryReport {
     Integer bonusInMonth;
     Integer netSalary;
     LocalDate payDate;
+    String customerFeedback;
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    Boolean isReadByAdmin = false;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "teacher_code", referencedColumnName = "teacherCode")

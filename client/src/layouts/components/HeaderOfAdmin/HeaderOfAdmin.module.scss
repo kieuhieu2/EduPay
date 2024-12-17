@@ -76,3 +76,80 @@
     margin-left: 14px;
     cursor: pointer;
 }
+
+/* Container của thông báo */
+.notification-container {
+    max-width: 300px; /* Đặt chiều rộng tối đa cho hộp thông báo */
+    max-height: 400px; /* Đặt chiều cao tối đa */
+    overflow-y: auto; /* Cho phép cuộn nếu quá nhiều thông báo */
+    background-color: #fff; /* Màu nền hộp thông báo */
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1); /* Đổ bóng cho hộp thông báo */
+    border-radius: 8px; /* Bo tròn các góc của hộp */
+    padding: 12px; /* Khoảng cách bên trong hộp */
+    position: absolute;
+    top: 10px; /* Khoảng cách từ trên cùng */
+    right: 0px; /* Gắn hộp thông báo vào phía bên phải */
+    z-index: 100; /* Đảm bảo hộp thông báo hiển thị trên các phần tử khác */
+    transition: opacity 0.3s ease; /* Hiệu ứng khi ẩn/hiện hộp thông báo */
+}
+
+/* Mỗi mục thông báo */
+.notification-item {
+    padding: 10px 0; /* Khoảng cách trên và dưới */
+    border-bottom: 1px solid #ddd; /* Đường chia giữa các thông báo */
+    font-size: 14px; /* Kích thước chữ */
+}
+
+.notification-item:last-child {
+    border-bottom: none; /* Xóa đường chia cho mục cuối cùng */
+}
+
+.notification-item p {
+    margin: 0;
+    font-weight: bold; /* Làm đậm nội dung chính */
+}
+
+.notification-item span {
+    font-size: 12px;
+    color: #777; /* Màu chữ cho trạng thái đã đọc/chưa đọc */
+}
+
+/* Badge hiển thị số lượng thông báo chưa đọc */
+.badge {
+    position: absolute;
+    top: -3px;
+    right: -5px;
+    background-color: var(--primary); /* Màu nền của badge */
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 50%;
+}
+
+/* Đặc biệt cho phần hiện thị thông báo */
+.action-btn {
+    position: relative;
+    font-size: 2rem;
+    color: #161823;
+    background-color: transparent;
+    padding: 4px 10px;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    color: var(--primary); /* Thay đổi màu khi hover */
+}
+
+.notification-container p {
+    font-size: 1.4rem;
+    color: #161823;
+    margin: 8px 0;
+    width: 300px;
+}
+
+.notification-container span {
+    font-size: 1.2rem;
+    color: #555;
+}
+

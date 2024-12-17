@@ -21,4 +21,6 @@ public class GetMySalaryReportResponse {
     Integer bonusInMonth;
     Integer netSalary;
     LocalDate payDate;
+    Integer salaryReportId;
+
 }

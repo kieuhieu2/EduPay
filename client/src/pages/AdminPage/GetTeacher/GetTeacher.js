@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { getTeacher } from '~/services/AdminService/TeacherService';
 import classNames from 'classnames/bind'; 
-import styles from './GetTeacher.module.scss'; // Import file CSS module
+import styles from './GetTeacher.module.scss'; 
 
-const cx = classNames.bind(styles); // Bind classNames với styles
+const cx = classNames.bind(styles); 
 
 function GetTeacher() {
     const [teacherCode, setTeacherCode] = useState('');
@@ -16,10 +16,10 @@ function GetTeacher() {
 
     const handleSearch = async () => {
         try {
-            const result = await getTeacher(teacherCode); // Gọi API
+            const result = await getTeacher(teacherCode); 
             if (result) {
-                setTeacherData(result); // Lưu dữ liệu giáo viên vào state
-                setError(null); // Reset lỗi nếu có dữ liệu
+                setTeacherData(result); 
+                setError(null); 
             } else {
                 setTeacherData(null);
                 setError('Không tìm thấy giáo viên');

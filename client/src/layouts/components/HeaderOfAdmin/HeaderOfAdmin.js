@@ -18,7 +18,8 @@ import Menu from '~/components/Popper/Menu';
 import { InboxIcon  } from '~/components/Icons';
 import Image from '~/components/Image';
 import { useNavigate } from 'react-router-dom';
-
+import { useEffect, useState } from 'react';
+import { getCustomerFeedbacks } from '~/services/salaryReportService';
 const cx = classNames.bind(styles);
 
 const MENU_ITEMS = [
@@ -201,6 +202,30 @@ function HeaderOfAdmin() {
         },
     ];
 
+    const [feedbacks, setFeedbacks] = useState([]); 
+    const [unreadCount, setUnreadCount] = useState(0);
+    const [showNotifications, setShowNotifications] = useState(false);
+
+    // Hàm gọi API và lấy thông tin phản hồi
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getCustomerFeedbacks(); 
+                setFeedbacks(data);
+                const unread = data.filter(item => item.note !== 'wasRead');
+                setUnreadCount(unread.length);
+            } catch (error) {
+                console.error('Error fetching feedbacks:', error);
+            }
+            // console.log('feedbacks:', feedbacks);
+        };
+        fetchData();
+    }, []);
+
+    const handleShowNotifications = () => {
+        setShowNotifications(!showNotifications);
+    };
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -210,14 +235,39 @@ function HeaderOfAdmin() {
                 <div className={cx('actions')}>
                     {currentUser ? (
                         <>
-                            
-                            
-                            <Tippy delay={[0, 50]} content="Inbox" placement="bottom">
-                                <button className={cx('action-btn')}>
+                            <Tippy
+                                interactive 
+                                visible={showNotifications} 
+                                placement="bottom"
+                                content={
+                                    <div className={cx('notification-container')}>
+                                        {feedbacks.length > 0 ? (
+                                            feedbacks.map((item, index) => (
+                                                <div key={index} className={cx('notification-item')}>
+                                                    <p>{item.message}</p>
+                                                    <span>{item.note === 'wasRead' ? 'Đã đọc' : 'Chưa đọc'}</span>
+                                                    <p><strong>Feedback:</strong> {item.customerFeedback}</p> 
+                                                    {/* <p><strong>Salary Report ID:</strong> {item.salaryReportId}</p> */}
+                                                    <button 
+                                                        onClick={() => navigate(`/getSalaryReport`)} 
+                                                        className={cx('salary-report-btn')}
+                                                    >
+                                                        <strong>Salary Report ID:</strong> {item.salaryReportId}
+                                                    </button>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <p>Không có thông báo nào</p>
+                                        )}
+                                    </div>
+                                }
+                            >
+                                <button className={cx('action-btn')} onClick={handleShowNotifications}>
                                     <InboxIcon />
-                                    <span className={cx('badge')}>12</span>
+                                    <span className={cx('badge')}>{unreadCount}</span>
                                 </button>
                             </Tippy>
+
                         </>
                     ) : (
                         <>

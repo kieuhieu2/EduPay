@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getSalaryReport } from '~/services/AdminService/salaryReportService';
+import { getSalaryReport, getSalaryReportById } from '~/services/AdminService/salaryReportService';
 import classNames from 'classnames/bind';
 import styles from './GetSalaryReport.module.scss';
 import { ToastContainer, toast } from 'react-toastify';
@@ -16,19 +16,17 @@ function SalaryReport() {
     };
 
     const handleSearch = async () => {
-        if (!searchInput.includes('/')) {
-            toast.error('Vui lòng nhập định dạng đúng: teacherCode/month/year');
-            return;
-        }
 
         const [teacherCode, month, year] = searchInput.split('/');
-        if (!teacherCode || !month || !year) {
-            toast.error('Vui lòng nhập đầy đủ thông tin: teacherCode/month/year');
-            return;
-        }
 
         try {
-            const result = await getSalaryReport(teacherCode, parseInt(month), parseInt(year));
+            let result = null;
+
+            if(teacherCode && month && year) {
+                result = await getSalaryReport(teacherCode, parseInt(month), parseInt(year));
+            } else if(teacherCode) {
+                result = await getSalaryReportById(teacherCode);
+            }
 
             if (result) {
                 setSalaryReport(result);

@@ -16,3 +16,20 @@ export const getSalaryReport = async (teacherCode, month, year) => {
         throw error; 
     }
 };
+
+export const getSalaryReportById = async (salaryReportId) => {
+    try {
+        const token = localStorage.getItem('token');
+
+        const res = await httpRequest.get(`salaryReport/${salaryReportId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+
+        return res.result;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; 
+    }
+};
