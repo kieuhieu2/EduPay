@@ -17,6 +17,23 @@ export const createDeduction = async (teacherCode, data) => {
     }
 };
 
+export const getDeduction = async (deductionId) => {
+    try {
+        const token = localStorage.getItem('token');
+
+        const res = await httpRequest.get(`/deduction/${deductionId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+
+        return res;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+};
+
 export const getDeductions = async (teacherCode, month, year) => {
     try {
         const token = localStorage.getItem('token');

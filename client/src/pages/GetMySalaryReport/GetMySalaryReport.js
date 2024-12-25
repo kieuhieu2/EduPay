@@ -9,9 +9,7 @@ function GetSalaryReport() {
     const [month, setMonth] = useState('');
     const [year, setYear] = useState('');
     const [salaryData, setSalaryData] = useState(null);
-    const [feedback, setFeedback] = useState({
-        customerFeedback: '',
-    });
+    const [feedback, setFeedback] = useState('');
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
@@ -41,7 +39,8 @@ function GetSalaryReport() {
         }
 
         try {
-            await createCustomerFeedback(salaryData.salaryReportId, feedback);
+            const body = { "customerFeedback": feedback };
+            await createCustomerFeedback(salaryData.salaryReportId, body);
             setSuccessMessage('Phản hồi của bạn đã được gửi thành công!');
             setError('');
             setFeedback('');

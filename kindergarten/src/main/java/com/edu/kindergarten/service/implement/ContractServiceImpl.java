@@ -30,9 +30,7 @@ public class ContractServiceImpl implements ContractService {
 
         Contract contract = contractMapper.toContract(request);
         contract.setTeacher(teacher);
-
         contractRepository.save(contract);
-
         return contractMapper.toContractCreateResponse(contract);
     }
 
@@ -49,9 +47,7 @@ public class ContractServiceImpl implements ContractService {
                 .orElseThrow(() -> new AppException(ErrorCode.CONTRACT_NOT_FOUND));
 
         contract = contractMapper.updateContract(contract, request);
-
         contractRepository.save(contract);
-
         return contractMapper.toContractCreateResponse(contract);
     }
 
@@ -59,7 +55,6 @@ public class ContractServiceImpl implements ContractService {
     public void deleteContract(Integer contractId) {
         Contract contract = contractRepository.findById(contractId)
                 .orElseThrow(() -> new AppException(ErrorCode.CONTRACT_NOT_FOUND));
-
         contractRepository.deleteByContractId(contractId);
     }
 }

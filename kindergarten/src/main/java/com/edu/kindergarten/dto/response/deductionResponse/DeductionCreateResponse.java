@@ -10,11 +10,12 @@ import lombok.experimental.FieldDefaults;
 @Data
 @Getter
 @Setter
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class DeductionCreateResponse {
     Long deductionId;
     String date;
     DeductionType deductionType;
     Integer amount;
     String description;
+    Integer sumOfDeduction;
 }

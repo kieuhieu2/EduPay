@@ -18,10 +18,16 @@ import GetAttendance from '~/pages/AdminPage/GetAttendance';
 import CreateAttendance from '~/pages/AdminPage/CreateAttendance';
 import CreateDeduction from '~/pages/AdminPage/CreateDeduction';
 import GetSalaryReport from '~/pages/AdminPage/GetSalaryReport';
+import GetDeduction from '~/pages/AdminPage/GetDeduction';
+import GetBasicSalary from '~/pages/AdminPage/GetBasicSalary';
+import CreateBasicSalary from '~/pages/AdminPage/CreateBasicSalary';
+import GetContract from '~/pages/AdminPage/GetContract';
+import CreateContract from '~/pages/AdminPage/CreateContract';
+import GetDeductionCost from '~/pages/AdminPage/GetDeductionCost';
 
 //teacher pages
 import GetMySalaryReport from '~/pages/GetMySalaryReport';
-import GetBasicSalary from '~/pages/GetBasicSalary';
+import GetMyBasicSalary from '~/pages/GetMyBasicSalary';
 import GetMyInfo from '~/pages/GetMyInfo';
 
 // Public routes
@@ -29,7 +35,7 @@ const publicRoutes = [
     { path: config.routes.home, component: Home, layout: HeaderOnly },
     { path: config.routes.login, layout: HeaderOnly, component: Login },
     { path: config.routes.getMySalaryReport, component: GetMySalaryReport, layout: TeacherLayout},
-    { path: config.routes.getMyBasicSalary, component: GetBasicSalary, layout: TeacherLayout, role: 'ROLE_TEACHER'},
+    { path: config.routes.getMyBasicSalary, component: GetMyBasicSalary, layout: TeacherLayout, role: 'ROLE_TEACHER'},
 ];
 
 const privateRoutes = [
@@ -41,6 +47,12 @@ const privateRoutes = [
     { path: config.routes.createAttendance, component: CreateAttendance, layout: AdminLayout, role: 'ROLE_ADMIN' },
     { path: config.routes.createDeduction, component: CreateDeduction, layout: AdminLayout, role: 'ROLE_ADMIN' },
     { path: config.routes.getSalaryReport, component: GetSalaryReport, layout: AdminLayout, role: 'ROLE_ADMIN' },
+    { path: config.routes.getDeduction, component: GetDeduction, layout: AdminLayout, role: 'ROLE_ADMIN' },
+    { path: config.routes.getBasicSalary, component: GetBasicSalary, layout: AdminLayout, role: 'ROLE_ADMIN' },
+    { path: config.routes.createBasicSalary, component: CreateBasicSalary, layout: AdminLayout, role: 'ROLE_ADMIN' },
+    { path: config.routes.getContract, component: GetContract, layout: AdminLayout, role: 'ROLE_ADMIN' },
+    { path: config.routes.createContract, component: CreateContract, layout: AdminLayout, role: 'ROLE_ADMIN' },
+    { path: config.routes.getDeductionCost, component: GetDeductionCost, layout: AdminLayout, role: 'ROLE_ADMIN' },
     
     //Teacher routes
     { path: config.routes.teacher, component: Home, layout: TeacherLayout, role: 'ROLE_TEACHER'},

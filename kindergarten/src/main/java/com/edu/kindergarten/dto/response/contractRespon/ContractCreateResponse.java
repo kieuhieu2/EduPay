@@ -1,7 +1,6 @@
 package com.edu.kindergarten.dto.response.contractRespon;
 
 import com.edu.kindergarten.enums.ContractType;
-import com.edu.kindergarten.enums.HolidayPublic;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
@@ -15,10 +14,10 @@ import java.time.LocalDate;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ContractCreateResponse {
+    Integer contractId;
     ContractType contractType;
     LocalDate startDate;
     LocalDate endDate;
     Integer salaryOfMonth;
-    HolidayPublic holidayPublic;
     Integer annualLeaveDaysInMonth;
 }

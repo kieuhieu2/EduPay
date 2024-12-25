@@ -1,7 +1,6 @@
 package com.edu.kindergarten.entity;
 
 import com.edu.kindergarten.enums.ContractType;
-import com.edu.kindergarten.enums.HolidayPublic;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -9,7 +8,6 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -27,9 +25,6 @@ public class Contract {
     LocalDate startDate;
     LocalDate endDate;
     Integer salaryOfMonth;
-
-    @Enumerated(EnumType.STRING)
-    HolidayPublic holidayPublic;
 
     Integer annualLeaveDaysInMonth;
 

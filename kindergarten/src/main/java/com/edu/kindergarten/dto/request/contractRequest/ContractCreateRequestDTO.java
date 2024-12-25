@@ -1,7 +1,6 @@
 package com.edu.kindergarten.dto.request.contractRequest;
 
 import com.edu.kindergarten.enums.ContractType;
-import com.edu.kindergarten.enums.HolidayPublic;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
@@ -19,6 +18,5 @@ public class ContractCreateRequestDTO {
     LocalDate startDate;
     LocalDate endDate;
     Integer salaryOfMonth;
-    HolidayPublic holidayPublic;
     Integer annualLeaveDaysInMonth;
 }
