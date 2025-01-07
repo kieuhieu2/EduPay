@@ -1,6 +1,7 @@
 package com.edu.kindergarten.repository;
 
 import com.edu.kindergarten.entity.BasicSalary;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,4 +16,9 @@ public interface BasicSalaryRepository extends JpaRepository<BasicSalary, Intege
     @Modifying
     @Query("DELETE FROM BasicSalary bs WHERE bs.basicSalaryId = :basicSalaryId")
     void deleteByBasicSalaryId(Integer basicSalaryId);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE BasicSalary bs SET bs.basicSalary = :basicSalary")
+    void updateAllBasicSalary(Integer basicSalary);
 }

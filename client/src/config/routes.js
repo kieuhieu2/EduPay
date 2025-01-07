@@ -18,9 +18,11 @@ const routes = {
     createDeduction: '/createDeduction',
 
     getSalaryReport: '/getSalaryReport',
+    createSalaryReport: '/CreateSalaryReport',
 
     getBasicSalary: '/GetBasicSalary',
     createBasicSalary: '/CreateBasicSalary',
+    updateBasicSalary: '/UpdateBasicSalary',
 
     getContract: '/getContract',
     createContract: '/CreateContract',

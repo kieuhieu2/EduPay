@@ -57,4 +57,11 @@ public class BasicSalaryController {
                 .result(basicSalaryService.getMyBasicSalary(teacherCode))
                 .build();
     }
+
+    @GetMapping(path = "/updateAllBasicSalary/{basicSalary}", headers = "apiVersion=v1.0")
+    public ApiResponse<String> updateAllBasicSalary(@PathVariable Integer basicSalary) {
+        return ApiResponse.<String>builder()
+                .result(basicSalaryService.updateAllBasicSalary(basicSalary))
+                .build();
+    }
 }

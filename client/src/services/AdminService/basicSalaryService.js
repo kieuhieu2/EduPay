@@ -46,3 +46,18 @@ export const updateBasicSalary = async (basicSalaryId,data) => {
         throw error;
     }
 };
+
+export const updateAllBasicSalary = async (basicSalary) => {
+    try {
+        const token = localStorage.getItem("token");
+        const res = await httpRequest.get(`/basicSalary/updateAllBasicSalary/${basicSalary}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return res;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+}

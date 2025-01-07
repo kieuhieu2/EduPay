@@ -9,4 +9,5 @@ public interface BasicSalaryService {
     public BasicSalaryCreateResponse updateBasicSalary(Integer basicSalaryId, BasicSalaryCreateRequestDTO request);
     public void deleteBasicSalary(Integer basicSalaryId);
     public BasicSalaryCreateResponse getMyBasicSalary(String teacherCode);
+    public String updateAllBasicSalary(Integer basicSalary);
 }

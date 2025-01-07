@@ -25,18 +25,18 @@ const cx = classNames.bind(styles);
 const MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
-        title: 'Giao vien',
+        title: 'Giáo viên',
         children: {
-            title: 'Quan ly giao vien',
+            title: 'Quản lý giáo viên',
             data: [
                 {
                     type: 'getTeacher',
-                    title: 'Xem thong tin giao vien',
+                    title: 'Xem thông tin giáo viên',
                     to: '/getTeacher',
                 },
                 {
                     type: 'createTeacher',
-                    title: 'Them moi giao vien',
+                    title: 'Thêm mới giáo viên',
                     to: '/createTeacher',
                 },
             ],
@@ -44,18 +44,18 @@ const MENU_ITEMS = [
     },
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
-        title: 'Quan ly',
+        title: 'Quản lý',
         children: {
-            title: 'Thonbg tin nguoi phu trach',
+            title: 'Thông tin người phụ trách',
             data: [
                 {
                     type: 'manager',
-                    title: 'Xem thong tin Quan ly',
+                    title: 'Xem thông tin Quản lý',
                     to: '/getManager',
                 },
                 {
                     type: 'manager',
-                    title: 'Them moi Quan ly',
+                    title: 'Thêm mới Quản lý',
                     to: '/createManager',
                 },
             ],
@@ -63,17 +63,16 @@ const MENU_ITEMS = [
     },
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion} />,
-        title: 'Bang luong',
-
+        title: 'Bảng lương',
         children: {
-            title: 'Quan ly bang luong',
+            title: 'Quản lý bảng lương',
             data: [
                 {
-                    title: 'Xem thong tin bang luong',
+                    title: 'Xem thông tin bảng lương',
                     to: '/getSalaryReport',
                 },
                 {
-                    title: 'Them moi bang luong',
+                    title: 'Thêm mới bảng lương',
                     to: '/createSalaryReport',
                 },
             ],
@@ -81,19 +80,18 @@ const MENU_ITEMS = [
     },
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
-        title: 'Diem danh',
+        title: 'Điểm danh',
         children: {
-            title: 'Thong tin diem danh',
+            title: 'Thông tin điểm danh',
             data: [
                 {
-                
                     type: 'attendance',
-                    title: 'Xem thong tin diem danh cua giao vien',
+                    title: 'Xem thông tin điểm danh của giáo viên',
                     to: '/getAttendance'
                 },
                 {
                     type: 'attendance',
-                    title: 'Them moi diem danh cua giao vien',
+                    title: 'Thêm mới điểm danh của giáo viên',
                     to: '/createAttendance',
                 },
             ],
@@ -101,18 +99,18 @@ const MENU_ITEMS = [
     },
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
-        title: 'Cac loai khau tru',
+        title: 'Các loại khẩu trừ',
         children: {
-            title: 'Thong tin khau tru',
+            title: 'Thông tin khẩu trừ',
             data: [
                 {
                     type: 'deduction',
-                    title: 'Xem thong tin khau tru cua giao vien',
+                    title: 'Xem thông tin khẩu trừ của giáo viên',
                     to: '/getDeduction',
                 },
                 {
                     type: 'deduction',
-                    title: 'Them moi khau tru cua giao vien',
+                    title: 'Thêm mới khẩu trừ của giáo viên',
                     to: '/createDeduction',
                 },
             ],
@@ -120,37 +118,42 @@ const MENU_ITEMS = [
     },
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
-        title: 'Luong co ban',
+        title: 'Lương cơ bản',
         children: {
-            title: 'Thong tin luong co ban',
+            title: 'Thông tin lương cơ bản',
             data: [
                 {
                     type: 'basicSalary',
-                    title: 'Xem thong tin luong co ban cua giao vien',
+                    title: 'Xem thông tin lương cơ bản của giáo viên',
                     to: '/getBasicSalary',
                 },
                 {
                     type: 'basicSalary',
-                    title: 'Them moi luong co ban cua giao vien',
+                    title: 'Thêm mới lương cơ bản của giáo viên',
                     to: '/createBasicSalary',
+                },
+                {
+                    type: 'basicSalary',
+                    title: 'Thay đổi lương cơ bản của giáo viên',
+                    to: '/updateBasicSalary',
                 },
             ],
         },
     },
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
-        title: 'hop dong lao dong',
+        title: 'Hợp đồng lao động',
         children: {
-            title: 'Thong tin hop dong lao dong',
+            title: 'Thông tin hợp đồng lao động',
             data: [
                 {
                     type: 'contract',
-                    title: 'Xem thong tin hop dong lao dong cua giao vien',
+                    title: 'Xem thông tin hợp đồng lao động của giáo viên',
                     to: '/getContract',
                 },
                 {
                     type: 'contract',
-                    title: 'Them moi hop dong lao dong cua giao vien',
+                    title: 'Thêm mới hợp đồng lao động của giáo viên',
                     to: '/createContract',
                 },
             ],
@@ -158,25 +161,26 @@ const MENU_ITEMS = [
     },
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
-        title: 'Muc phat cac loi (khau tru)',
+        title: 'Mức phạt các lỗi (khấu trừ)',
         children: {
-            title: 'Muc khau tru',
+            title: 'Mức khấu trừ',
             data: [
                 {
                     type: 'deductionCost',
-                    title: 'Xem thong tin muc khau tru',
+                    title: 'Xem thông tin mức khấu trừ',
                     to: '/getDeductionCost',
                 },
                 {
                     type: 'deductionCost',
-                    title: 'Them moi muc khau tru',
+                    title: 'Thêm mới mức khấu trừ',
                     to: '/createDeductionCost',
                 },
             ],
         },
     },
-
 ];
+
+
 
 function HeaderOfAdmin() {
     const navigate = useNavigate();
@@ -209,7 +213,7 @@ function HeaderOfAdmin() {
         ...MENU_ITEMS,
         {
             icon: <FontAwesomeIcon icon={faSignOut} />,
-            title: 'Log out',
+            title: 'Đăng xuất',
             separate: true,
             to: '/',
             onClick: handleLogout,

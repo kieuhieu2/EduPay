@@ -76,4 +76,10 @@ public class BasicSalaryServiceIpml implements BasicSalaryService {
                 .orElseThrow(() -> new AppException(ErrorCode.BASIC_SALARY_NOT_FOUND));
         return basicSalaryMapper.toBasicSalaryCreateResponse(basicSalary);
     }
+
+    @Override
+    public String updateAllBasicSalary(Integer basicSalary) {
+        basicSalaryRepository.updateAllBasicSalary(basicSalary);
+        return "sucess";
+    }
 }

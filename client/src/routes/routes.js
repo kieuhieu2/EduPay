@@ -24,6 +24,8 @@ import CreateBasicSalary from '~/pages/AdminPage/CreateBasicSalary';
 import GetContract from '~/pages/AdminPage/GetContract';
 import CreateContract from '~/pages/AdminPage/CreateContract';
 import GetDeductionCost from '~/pages/AdminPage/GetDeductionCost';
+import CreateSalaryReport from '~/pages/AdminPage/CreateSalaryReport'
+import UpdateBasicSalary from '~/pages/AdminPage/UpdateBasicSalary';
 
 //teacher pages
 import GetMySalaryReport from '~/pages/GetMySalaryReport';
@@ -53,12 +55,12 @@ const privateRoutes = [
     { path: config.routes.getContract, component: GetContract, layout: AdminLayout, role: 'ROLE_ADMIN' },
     { path: config.routes.createContract, component: CreateContract, layout: AdminLayout, role: 'ROLE_ADMIN' },
     { path: config.routes.getDeductionCost, component: GetDeductionCost, layout: AdminLayout, role: 'ROLE_ADMIN' },
+    { path: config.routes.createSalaryReport, component: CreateSalaryReport, layout: AdminLayout, role: 'ROLE_ADMIN' },
+    { path: config.routes.updateBasicSalary, component: UpdateBasicSalary, layout: AdminLayout, role: 'ROLE_ADMIN' },
     
     //Teacher routes
     { path: config.routes.teacher, component: Home, layout: TeacherLayout, role: 'ROLE_TEACHER'},
     { path: config.routes.getMyInfo, component: GetMyInfo, layout: TeacherLayout, role: 'ROLE_TEACHER'},
-
-    //Manager routes
 
 ];
 

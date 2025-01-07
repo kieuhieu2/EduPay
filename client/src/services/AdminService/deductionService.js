@@ -1,10 +1,10 @@
 import * as httpRequest from '~/utils/httpRequest'
 
-export const createDeduction = async (teacherCode, data) => {
+export const createDeduction = async (teacherCode, deductionData) => {
     try {
         const token = localStorage.getItem('token');
 
-        const res = await httpRequest.post(`/deduction/${teacherCode}`, data, {
+        const res = await httpRequest.post(`/deduction/${teacherCode}`, deductionData, {
             headers: {
                 Authorization: `Bearer ${token}`,
             }
