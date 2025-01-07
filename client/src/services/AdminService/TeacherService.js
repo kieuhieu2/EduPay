@@ -35,3 +35,55 @@ export const getTeacher = async (teacherCode) => {
     }
 };
 
+export const getAllTeachers = async () => {
+    try {
+        const token = localStorage.getItem('token');
+        
+        const res = await httpRequest.get(`teachers/`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+
+        return res.result;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+}
+
+export const updateTeacher = async (teacherCode, dataNewTeacher) => {
+    try {
+        const token = localStorage.getItem('token');
+        console.log("token put: ", token)
+
+        const res = await httpRequest.put(`teachers/${teacherCode}`, dataNewTeacher, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+
+        return res.result;
+    } catch (error) {
+        console.error("Error: ", error);
+        throw error;
+    }
+}
+
+export const deleleTeacher = async (teacherCode) => {
+    try {
+        const token = localStorage.getItem('token');
+        
+        const res = await httpRequest.deleteRequest(`teachers/${teacherCode}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+
+        return res.result;
+    } catch (error) {
+        console.error("Error: ", error);
+        throw error;
+    }
+}
+

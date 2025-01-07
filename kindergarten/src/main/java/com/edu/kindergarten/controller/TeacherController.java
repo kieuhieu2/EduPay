@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/teachers")
 @RequiredArgsConstructor
@@ -50,6 +52,13 @@ public class TeacherController {
     public ApiResponse<TeacherResponse> getMyInfo() {
         return ApiResponse.<TeacherResponse>builder()
                 .result(teacherService.getMyInfo())
+                .build();
+    }
+
+    @GetMapping(path = "/", headers = "apiVersion=v1.0")
+    public ApiResponse<List<TeacherResponse>> getAllTeachers() {
+        return ApiResponse.<List<TeacherResponse>>builder()
+                .result(teacherService.getAllTeachers())
                 .build();
     }
 

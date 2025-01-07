@@ -1,80 +1,126 @@
+// GetTeacher.module.scss
 .container {
-    max-width: 600px;
-    margin: 0 auto;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .heading {
-    text-align: center;
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
     color: #333;
 }
 
-.searchContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.label {
-    font-size: 16px;
-    color: #555;
-}
-
-.input {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-.button {
-    padding: 10px 15px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.button:hover {
-    background-color: #0056b3;
-}
-
 .error {
-    color: #d9534f;
-    font-size: 14px;
-    margin-top: 10px;
-}
-
-.teacherInfo {
-    background-color: #fff;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.infoList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.infoList li {
-    font-size: 16px;
-    line-height: 1.5;
+    color: red;
     margin-bottom: 10px;
+    font-size: 14px;
 }
 
-.infoList li strong {
-    font-weight: bold;
-    color: #333;
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f0f0f0;
+        font-weight: bold;
+        color: #333;
+    }
+
+    td {
+        color: #555;
+    }
+
+    .button {
+        margin-top: 2px;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+    }
+
+    .save {
+        background-color: #28a745;
+        color: white;
+
+        &:hover {
+            background-color: #218838;
+        }
+    }
+
+    .cancel {
+        background-color: #ffc107;
+        color: white;
+
+        &:hover {
+            background-color: #e0a800;
+        }
+    }
+
+    .edit {
+        background-color: #007bff;
+        color: white;
+
+        &:hover {
+            background-color: #0056b3;
+        }
+    }
+
+    .delete {
+        background-color: #dc3545;
+        color: white;
+
+        &:hover {
+            background-color: #c82333;
+        }
+    }
+
+    input {
+        padding: 6px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        width: 100%;
+        box-sizing: border-box;
+
+        &:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+    }
+
+    .nameColumn {
+        width: 80px;
+    }
+
+    .expColumn {
+        width: 5px;
+    }
+}
+
+@media (max-width: 768px) {
+    .table {
+        font-size: 12px;
+
+        th, td {
+            padding: 8px;
+        }
+
+        .button {
+            font-size: 12px;
+            padding: 4px 8px;
+        }
+    }
 }

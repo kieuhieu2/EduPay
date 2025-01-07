@@ -7,6 +7,8 @@ import com.edu.kindergarten.dto.response.teacherResponse.TeacherUpdateResponse;
 import com.edu.kindergarten.entity.Teacher;
 import org.mapstruct.*;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface TeacherMapper {
 
@@ -15,6 +17,8 @@ public interface TeacherMapper {
 
     // Map Teacher entity to TeacherResponse DTO (for response)
     TeacherResponse toTeacherResponse(Teacher teacher);
+
+    List<TeacherResponse> toListTeacherResponse(List<Teacher> teachers);
 
     TeacherUpdateResponse toTeacherUpdateResponse(Teacher teacher);
 

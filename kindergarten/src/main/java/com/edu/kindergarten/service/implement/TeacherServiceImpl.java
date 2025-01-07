@@ -24,6 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -71,6 +72,7 @@ public class TeacherServiceImpl implements TeacherService {
                 .orElseThrow(() -> new AppException(ErrorCode.TEACHER_NOT_FOUND));
 
         teacherMapper.updateTeacher(teacher, request);
+
         try {
             teacher = teacherRepository.save(teacher);
         } catch (DataIntegrityViolationException exception) {
@@ -104,5 +106,11 @@ public class TeacherServiceImpl implements TeacherService {
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
         return teacherMapper.toTeacherResponse(teacher);
+    }
+
+    @Override
+    public List<TeacherResponse> getAllTeachers() {
+        List<Teacher> teachers = teacherRepository.findAll();
+        return teacherMapper.toListTeacherResponse(teachers);
     }
 }

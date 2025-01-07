@@ -14,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TeacherUpdateRequestDTO {
-    String password;
     String firstName;
     String lastName;
     LocalDate dob;

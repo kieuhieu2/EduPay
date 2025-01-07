@@ -22,12 +22,12 @@ const cx = classNames.bind(styles);
 const MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion} />,
-        title: 'Bang luong hang thang cua toi',
+        title: 'Bảng lương của tôi ',
         to: '/getMySalaryReport',
     },
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion} />,
-        title: 'Bang luong co ban cua toi',
+        title: 'Bảng lương cơ bản của tôi',
         to: '/getMyBasicSalary',
     },
 
@@ -49,7 +49,7 @@ function HeaderOfTeacher() {
     const userMenu = [
         {
             icon: <FontAwesomeIcon icon={faUser} />,
-            title: 'Thong tin cua teacher',
+            title: 'Thông tin của tôi',
             to: '/getMyInfo',
         },
         ...MENU_ITEMS,

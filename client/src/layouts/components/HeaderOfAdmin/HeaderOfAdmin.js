@@ -64,7 +64,20 @@ const MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion} />,
         title: 'Bang luong',
-        to: '/getSalaryReport',
+
+        children: {
+            title: 'Quan ly bang luong',
+            data: [
+                {
+                    title: 'Xem thong tin bang luong',
+                    to: '/getSalaryReport',
+                },
+                {
+                    title: 'Them moi bang luong',
+                    to: '/createSalaryReport',
+                },
+            ],
+        },
     },
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
@@ -73,9 +86,10 @@ const MENU_ITEMS = [
             title: 'Thong tin diem danh',
             data: [
                 {
+                
                     type: 'attendance',
                     title: 'Xem thong tin diem danh cua giao vien',
-                    to: '/getAttendance',
+                    to: '/getAttendance'
                 },
                 {
                     type: 'attendance',
